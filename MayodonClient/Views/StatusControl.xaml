@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="MayodonClient.Views.StatusControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:MayodonClient.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="160" d:DesignWidth="320"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             FontSize="15">
+    <materialDesign:Card Padding="10 8">
+        <DockPanel>
+            <Border DockPanel.Dock="Left" Width="48" Height="48" VerticalAlignment="Top" Margin="0 0 10 0" CornerRadius="4">
+                <Border.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="{Binding AvatarUrl}" />
+                </Border.Background>
+            </Border>
+            <StackPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Right" Text="{Binding CreatedAt.Value}" Foreground="#666666"/>
+                    <TextBlock DockPanel.Dock="Left">
+                        <Bold>
+                            <Run Text="{Binding DisplayName, Mode=OneTime}" />
+                        </Bold>
+                    </TextBlock>
+                    <TextBlock Text="{Binding AccountName}" TextTrimming="CharacterEllipsis" Foreground="#666666"/>
+                </DockPanel>
+                <TextBlock Text="{Binding Content}" TextWrapping="Wrap"/>
+
+                <!-- media -->
+                <!-- action bar-->
+            </StackPanel>
+        </DockPanel>
+    </materialDesign:Card>
+</UserControl>
