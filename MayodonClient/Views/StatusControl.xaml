@@ -19,6 +19,15 @@
              Cursor="Hand">
     <materialDesign:Card Padding="10 8">
         <DockPanel>
+            <DockPanel DockPanel.Dock="Top" Visibility="{Binding ReblogVisibility}">
+                <DockPanel DockPanel.Dock="Left" Width="58">
+                    <materialDesign:PackIcon Kind="TwitterRetweet" Foreground="#666666" HorizontalAlignment="Right"/>
+                </DockPanel>
+                <TextBlock Foreground="#666666" TextWrapping="Wrap">
+                    <Run Text="{Binding ReblogBy, Mode=OneTime}"/>
+                    さんにブーストされました
+                </TextBlock>
+            </DockPanel>
             <Border DockPanel.Dock="Left" Width="48" Height="48" VerticalAlignment="Top" Margin="0 0 10 0" CornerRadius="4">
                 <Border.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="{Binding AvatarUrl}" />

@@ -18,14 +18,11 @@ namespace MayodonClient.ViewModels
         public string AccountName { get; private set; }
         public string Content { get; private set; }
         public ReactiveCommand OpenCommand { get; private set; }
+        public System.Windows.Visibility ReblogVisibility { get; private set; }
+        public string ReblogBy { get; private set; }
 
         public StatusViewModel(Status status)
         {
-            AvatarUrl = status.Account.AvatarUrl;
-            DisplayName = status.Account.DisplayName;
-            AccountName = status.Account.AccountName;
-            Content = Regex.Replace(status.Content, "<.*?>", "");
-
             CreatedAt =
                 Observable.Interval(TimeSpan.FromSeconds(0.1))
                     .Select(x => FormatDate(status.CreatedAt))
@@ -33,6 +30,22 @@ namespace MayodonClient.ViewModels
 
             OpenCommand = new ReactiveCommand();
             OpenCommand.Subscribe(() => System.Diagnostics.Process.Start(status.Url));
+
+            if (status.Reblog != null)
+            {
+                ReblogVisibility = System.Windows.Visibility.Visible;
+                ReblogBy = status.Account.DisplayName;
+                status = status.Reblog;
+            }
+            else
+            {
+                ReblogVisibility = System.Windows.Visibility.Collapsed;
+            }
+
+            AvatarUrl = status.Account.AvatarUrl;
+            DisplayName = status.Account.DisplayName;
+            AccountName = status.Account.AccountName;
+            Content = Regex.Replace(status.Content, "<.*?>", "");
         }
 
         private string FormatDate(DateTime createdAt)
