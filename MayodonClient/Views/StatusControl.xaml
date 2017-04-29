@@ -45,7 +45,40 @@
                 </DockPanel>
                 <TextBlock Text="{Binding Content}" TextWrapping="Wrap"/>
 
-                <!-- media -->
+                <ItemsControl ItemsSource="{Binding MediaAttachments}" Height="110" Visibility="{Binding MediaVisibility}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Grid.Column" Value="{Binding Column}" />
+                            <Setter Property="Grid.Row" Value="{Binding Row}" />
+                            <Setter Property="Grid.ColumnSpan" Value="{Binding ColumnSpan}" />
+                            <Setter Property="Grid.RowSpan" Value="{Binding RowSpan}" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="234" Height="110" CornerRadius="4">
+                                <Border.Background>
+                                    <ImageBrush Stretch="UniformToFill" ImageSource="{Binding Url}" />
+                                </Border.Background>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
                 <!-- action bar-->
             </StackPanel>
         </DockPanel>

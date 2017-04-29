@@ -20,6 +20,8 @@ namespace MayodonClient.ViewModels
         public ReactiveCommand OpenCommand { get; private set; }
         public System.Windows.Visibility ReblogVisibility { get; private set; }
         public string ReblogBy { get; private set; }
+        public System.Windows.Visibility MediaVisibility { get; private set; }
+        public IEnumerable<MediaViewModel> MediaAttachments { get; private set; }
 
         public StatusViewModel(Status status)
         {
@@ -46,6 +48,18 @@ namespace MayodonClient.ViewModels
             DisplayName = status.Account.DisplayName;
             AccountName = status.Account.AccountName;
             Content = Regex.Replace(status.Content, "<.*?>", "");
+
+            int mediaCount = status.MediaAttachments.Count();
+            if (mediaCount > 0)
+            {
+                MediaVisibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                MediaVisibility = System.Windows.Visibility.Collapsed;
+            }
+
+            MediaAttachments = status.MediaAttachments.Select((x, i) => new MediaViewModel(x, i, mediaCount));
         }
 
         private string FormatDate(DateTime createdAt)
