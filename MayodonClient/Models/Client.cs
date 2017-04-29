@@ -57,6 +57,16 @@ namespace MayodonClient.Models
             }
         }
 
+        private Dictionary<string, Timeline> tagTimelines = new Dictionary<string, Timeline>();
+        public Timeline TagTimeline(string hashtag)
+        {
+            if (! tagTimelines.ContainsKey(hashtag))
+            {
+                tagTimelines[hashtag] = new Timeline(Mastodon.GetTagTimeline(hashtag), Mastodon.GetHashtagStreaming(hashtag));
+            }
+            return tagTimelines[hashtag];
+        }
+
         private MastodonClient mastodon;
         private MastodonClient Mastodon
         {
