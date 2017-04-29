@@ -31,6 +31,32 @@ namespace MayodonClient.Models
             }
         }
 
+        private Timeline homeTimeline;
+        public Timeline HomeTimeline
+        {
+            get
+            {
+                if(homeTimeline == null)
+                {
+                    homeTimeline = new Timeline(Mastodon.GetHomeTimeline(), Mastodon.GetUserStreaming());
+                }
+                return homeTimeline;
+            }
+        }
+
+        private IObservable<Status> localTimeline;
+        public IObservable<Status> LocalTimeline
+        {
+            get
+            {
+                if(localTimeline == null)
+                {
+                    localTimeline = PublicTimeline.Where(x => ! x.Account.AccountName.Contains("@"));
+                }
+                return localTimeline;
+            }
+        }
+
         private MastodonClient mastodon;
         private MastodonClient Mastodon
         {
