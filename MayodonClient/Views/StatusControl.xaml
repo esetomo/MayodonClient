@@ -14,7 +14,9 @@
              TextOptions.TextRenderingMode="Auto"        
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
-             FontSize="15">
+             FontSize="15"
+             MouseUp="UserControl_MouseUp"
+             Cursor="Hand">
     <materialDesign:Card Padding="10 8">
         <DockPanel>
             <Border DockPanel.Dock="Left" Width="48" Height="48" VerticalAlignment="Top" Margin="0 0 10 0" CornerRadius="4">

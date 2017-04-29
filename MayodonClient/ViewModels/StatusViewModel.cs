@@ -17,6 +17,7 @@ namespace MayodonClient.ViewModels
         public string DisplayName { get; private set; }
         public string AccountName { get; private set; }
         public string Content { get; private set; }
+        public ReactiveCommand OpenCommand { get; private set; }
 
         public StatusViewModel(Status status)
         {
@@ -29,6 +30,9 @@ namespace MayodonClient.ViewModels
                 Observable.Interval(TimeSpan.FromSeconds(0.1))
                     .Select(x => FormatDate(status.CreatedAt))
                     .ToReactiveProperty();
+
+            OpenCommand = new ReactiveCommand();
+            OpenCommand.Subscribe(() => System.Diagnostics.Process.Start(status.Url));
         }
 
         private string FormatDate(DateTime createdAt)

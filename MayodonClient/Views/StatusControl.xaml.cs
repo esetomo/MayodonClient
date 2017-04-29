@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MayodonClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace MayodonClient.Views
         public StatusControl()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            var vm = (StatusViewModel)DataContext;
+            vm.OpenCommand.Execute();            
         }
     }
 }
