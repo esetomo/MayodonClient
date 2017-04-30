@@ -12,11 +12,13 @@ namespace MayodonClient.ViewModels
     {
         private readonly IDisposable disposer;
         private readonly int limit;
+        private readonly int remove;
 
-        public TimelineViewModel(IObservable<Status> input, int limit)
+        public TimelineViewModel(IObservable<Status> input, int limit, int remove)
         {
             disposer = input.Subscribe(this);
             this.limit = limit;
+            this.remove = remove;
         }
 
         public void Dispose()
@@ -35,10 +37,10 @@ namespace MayodonClient.ViewModels
 
         public void OnNext(Status value)
         {
-            Insert(0, new StatusViewModel(value));
+            Add(new StatusViewModel(value));
 
-            while (Count > limit)
-                RemoveAt(Count - 1);
+            if(Count > limit)
+                Enumerable.Range(1, remove).ToList().ForEach((i) => RemoveAt(0));
         }
     }
 }

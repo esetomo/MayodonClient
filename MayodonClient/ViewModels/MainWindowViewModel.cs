@@ -27,7 +27,7 @@ namespace MayodonClient.ViewModels
                 .ToObservable()
                 .SelectMany(client => client.PublicTimeline)
                 .Distinct(x => x.Uri);
-            Timeline = new TimelineViewModel(timeline, 300);
+            Timeline = new TimelineViewModel(timeline, 200, 100);
         }
     }
 }
